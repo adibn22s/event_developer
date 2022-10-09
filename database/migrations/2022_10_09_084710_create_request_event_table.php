@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('request_event', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()
+            ->index('fk_request_event_to_users');
             $table->enum('role',[1,2,3,4,5]);
             $table->string('instance');
             $table->string('event_name')-> unique();

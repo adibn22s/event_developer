@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('event', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('request_event_id')->nullable()
-            ->index('fk_event_to_request_event');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('event', function (Blueprint $table) {
+            $table->foreign('request_event_id','fk_event_to_request_event')
+            ->references('id')->on('request_event')->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 
@@ -29,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event');
+        Schema::table('event', function (Blueprint $table) {
+            $table->dropForeign('fk_event_to_request_event');
+        });
     }
 };
