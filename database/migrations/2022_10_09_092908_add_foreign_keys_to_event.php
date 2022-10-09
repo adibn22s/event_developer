@@ -17,6 +17,9 @@ return new class extends Migration
             $table->foreign('request_event_id','fk_event_to_request_event')
             ->references('id')->on('request_event')->onDelete('cascade')
             ->onUpdate('cascade');
+            $table->foreign('user_id','fk_event_to_users')
+            ->references('id')->on('users')->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
 
@@ -29,6 +32,7 @@ return new class extends Migration
     {
         Schema::table('event', function (Blueprint $table) {
             $table->dropForeign('fk_event_to_request_event');
+            $table->dropForeign('fk_event_to_users');
         });
     }
 };

@@ -25,8 +25,6 @@ return new class extends Migration
             $table->date('date_is_held');
             $table->string('description');
             $table->longText('poster')->nullable();
-            $table->date('added_date')->nullable();
-            $table->time('added_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
